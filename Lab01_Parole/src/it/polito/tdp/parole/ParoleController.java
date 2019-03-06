@@ -34,18 +34,46 @@ public class ParoleController {
     
     @FXML
     private Button btnReset;
+    
+    @FXML
+    private Button cancellabtn;
 
     @FXML // fx:id="btnInserisci"
     private Button btnInserisci; // Value injected by FXMLLoader
+    
+    @FXML
+    private TextField durataOP;
 
     @FXML
     void doInsert(ActionEvent event) {
-    	// TODO
+    	long tempo1 = System.nanoTime();
+    	txtResult.clear();
+    	String inserita = this.txtParola.getText();
+    	elenco.addParola(inserita);
+    	txtParola.clear();
+    	for (String s : elenco.getElenco())
+    		txtResult.appendText(s+"\n");
+    	durataOP.setText(Long.toString(System.nanoTime()-tempo1));
     }
     
     @FXML
     void doReset(ActionEvent event) {
-    	// TODO
+    	long tempo1 = System.nanoTime();
+    	txtResult.clear();
+    	txtParola.clear();
+    	elenco.reset();
+    	durataOP.setText(Long.toString(System.nanoTime()-tempo1));
+    }
+    
+    @FXML
+    void doCancella(ActionEvent event) {
+    	long tempo1 = System.nanoTime();
+    	String dacancellare = txtResult.getSelectedText();
+    	elenco.removeParola(dacancellare);
+    	txtResult.clear();
+    	for (String s : elenco.getElenco())
+    		txtResult.appendText(s+"\n");
+    	durataOP.setText(Long.toString(System.nanoTime()-tempo1));
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -57,4 +85,6 @@ public class ParoleController {
         elenco = new Parole() ;
         
     }
+    
+    
 }
