@@ -14,8 +14,8 @@ public class Parole {
 	}
 	
 	public void addParola(String p) {
-		if (lista.contains(p)!=true)
-			lista.add(p);
+		if (lista.contains(p.toLowerCase())!=true)
+			lista.add(p.toLowerCase());
 	}
 	
 	public List<String> getElenco() {

@@ -9,6 +9,7 @@ import it.polito.tdp.parole.model.Parole;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,8 +49,10 @@ public class ParoleController {
     void doInsert(ActionEvent event) {
     	long tempo1 = System.nanoTime();
     	txtResult.clear();
-    	String inserita = this.txtParola.getText();
-    	elenco.addParola(inserita);
+    	if (this.txtParola.getText().trim().equals("")!=true && this.stringContainsNumber(txtParola.getText())==false) {
+    		String inserita = this.txtParola.getText().trim();
+    		elenco.addParola(inserita);
+    	}
     	txtParola.clear();
     	for (String s : elenco.getElenco())
     		txtResult.appendText(s+"\n");
@@ -84,6 +87,10 @@ public class ParoleController {
 
         elenco = new Parole() ;
         
+    }
+    
+    public boolean stringContainsNumber (String s) {
+    	return Pattern.compile("[0-9]").matcher(s).find();
     }
     
     
